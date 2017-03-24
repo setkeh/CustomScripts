@@ -1,7 +1,7 @@
 #cloud-config
 coreos:
   etcd2:
-    discovery: https://discovery.etcd.io/6d67aa8250a17b47d67e83aed559ea75
+    discovery: https://discovery.etcd.io/19881403a256595d8eb01dd20054e50d
     advertise-client-urls: "http://$private_ipv4:2379"
     initial-advertise-peer-urls: "http://$private_ipv4:2380"
     listen-client-urls: "http://0.0.0.0:2379,http://0.0.0.0:4001"
