@@ -10,6 +10,14 @@ coreos:
     public-ip: $private_ipv4
     etcd_servers: "http://$private_ipv4:2379"
   units:
+    - name: 00-eth1.network
+      runtime: true
+      content: |
+        [Match]
+        Name=eth1
+
+        [Network]
+        Address=10.0.0.13/16
     - name: etcd2.service
       command: start
     - name: fleet.service
