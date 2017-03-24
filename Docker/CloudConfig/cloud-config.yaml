@@ -1,0 +1,30 @@
+#cloud-config
+coreos:
+  etcd2:
+    discovery: https://discovery.etcd.io/6d67aa8250a17b47d67e83aed559ea75
+    advertise-client-urls: "http://$private_ipv4:2379"
+    initial-advertise-peer-urls: "http://$private_ipv4:2380"
+    listen-client-urls: "http://0.0.0.0:2379,http://0.0.0.0:4001"
+    listen-peer-urls: "http://$private_ipv4:2380,http://$private_ipv4:7001"
+    data-dir: /var/lib/etcd2
+  fleet:
+    public-ip: $private_ipv4
+    etcd_servers: "http://$private_ipv4:2379"
+  units:
+    - name: etcd2.service
+      command: start
+    - name: fleet.service
+      command: start
+    - name: rpc-statd.service
+      command: start
+      enable: true
+    - name: var-www.mount
+      command: start
+      content: |
+        [Mount]
+        What=10.99.0.10:/storage
+        Where=/storage
+        Type=nfs
+
+ssh_authorized_keys:
+  - "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEAu1hCjcFM4oDpCDct+llPndIYm/CfZA2reb/fKv3eNvOIaSORFp8KphqbZomiH05X+ExaDdv5fhNGV16GYcTo6XZ1ABdoM2oO2LcMwkghrU9QZTCoZuJgfqbwbTO663MjER8lWSG6gy5pgByEHo3PEnwuGkNsFCrUYx+2ZjPWalUomq3vtG+JGxBw/Gu/0Hl/I20gpHnSbmITga0hGypTPySmZzs2CrvOkw/coB04R3Ofq4fMaTlXPguGQk6BbqZ8T7YfmOenTbZrTczuqtAp21k8qJJ7iQ9+FghzT2hqnBe9Swy1RTHMrIiLz05GLKmVS+R3jb1FjYcqUxz22Q6uVn4fq2Lq4AI1QhsWYz4ZfVo1GN5JgpHMYz/ChLQEeXY27vXysIGuTSysU+egIPJjaBtA1BQntPqIkvVjqFWHaAlliXjlLBDZp64AIBoff/0xuR3tIhSzibSUIxC1S2Gn2vP5V5awMcQzIOPHmycNbCMqH7BFfy5xb3xsdwZrhARK3gy5k0RXbRNq99Kegg2jzAL4GOB3lAlZFBhYaL42KpjOk7wwkHb1ZJl7+4VTLwlGsWdVMHhTBWH2mYChx6KzwvUIPBnFrp8fc+RGWEdinGajkR76GgFX9GZqYxXgu4ip23SoVfKktefY7UJSNByJp1vnxDpXsu+DvN1/fhETuy0="
