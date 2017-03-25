@@ -28,12 +28,11 @@ coreos:
     - name: var-lib-etcd2.mount
       command: start
       content: |
-        [Unit]
-        Description=Mount etcd Config
         [Mount]
-        What=/dev/vda1
+        Before=etcd2.service
+        What=10.99.0.10:/storage/shyilia
         Where=/var/lib/etcd2
-        Type=ext4
+        Type=nfs
     - name: etcd2.service
       command: start
     - name: fleet.service
