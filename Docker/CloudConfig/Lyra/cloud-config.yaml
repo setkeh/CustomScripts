@@ -1,7 +1,13 @@
 #cloud-config
+
+hostname: "Lyra"
+
 coreos:
+  update:
+    reboot-strategy: "etcd-lock"
   etcd2:
-    discovery: https://discovery.etcd.io/100da791ec47cbc6f08a195db8ae8b05
+    name: "Lyra"
+    discovery: https://discovery.etcd.io/7913af0f6a98ce1d6a6338845af20e7d
     advertise-client-urls: "http://10.99.0.12:2379"
     initial-advertise-peer-urls: "http://10.99.0.12:2380"
     listen-client-urls: "http://0.0.0.0:2379,http://0.0.0.0:4001"
@@ -18,6 +24,15 @@ coreos:
 
         [Network]
         Address=10.99.0.12/16
+    - name: var-lib-etcd2.mount
+      command: start
+      content: |
+        [Unit]
+        Description=Mount etcd Config
+        [Mount]
+        What=/dev/vda1
+        Where=/var/lib/etcd2
+        Type=ext4
     - name: etcd2.service
       command: start
     - name: fleet.service
@@ -25,7 +40,7 @@ coreos:
     - name: rpc-statd.service
       command: start
       enable: true
-    - name: storage.mount
+    - name: media.mount
       command: start
       content: |
         [Mount]
