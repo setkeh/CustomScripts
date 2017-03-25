@@ -7,7 +7,7 @@ coreos:
     reboot-strategy: "etcd-lock"
   etcd2:
     name: "Shyilia"
-    discovery: https://discovery.etcd.io/7913af0f6a98ce1d6a6338845af20e7d
+    discovery: https://discovery.etcd.io/5c00219439422b8f15da8d0e1a42fb08
     advertise-client-urls: "http://10.99.0.13:2379"
     initial-advertise-peer-urls: "http://10.99.0.13:2380"
     listen-client-urls: "http://0.0.0.0:2379,http://0.0.0.0:4001"
@@ -40,12 +40,14 @@ coreos:
     - name: rpc-statd.service
       command: start
       enable: true
-    - name: media.mount
+    - name: mnt.mount
       command: start
       content: |
         [Mount]
+        After=rpc-statd.service
+        Requires=rpc-statd.service
         What=10.99.0.10:/storage
-        Where=/media
+        Where=/mnt
         Type=nfs
 
 ssh_authorized_keys:
