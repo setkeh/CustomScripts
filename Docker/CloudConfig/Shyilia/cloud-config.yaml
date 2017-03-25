@@ -7,7 +7,7 @@ coreos:
     reboot-strategy: "etcd-lock"
   etcd2:
     name: "Shyilia"
-    discovery: "https://discovery.etcd.io/56bd68df14118ac1d7e90567b29b3cd2"
+    discovery: "https://discovery.etcd.io/911ca9b0cac6aa2548ebe72c5c30df80"
     advertise-client-urls: "http://10.99.0.13:2379"
     initial-advertise-peer-urls: "http://10.99.0.13:2380"
     listen-client-urls: "http://0.0.0.0:2379,http://0.0.0.0:4001"
