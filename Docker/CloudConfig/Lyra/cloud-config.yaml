@@ -7,7 +7,7 @@ coreos:
     reboot-strategy: "etcd-lock"
   etcd2:
     name: "Lyra"
-    discovery: "https://discovery.etcd.io/911ca9b0cac6aa2548ebe72c5c30df80"
+    discovery: "https://discovery.etcd.io/5b486258ddc3fbfb008f8426db939b50"
     advertise-client-urls: "http://10.99.0.12:2379"
     initial-advertise-peer-urls: "http://10.99.0.12:2380"
     listen-client-urls: "http://0.0.0.0:2379,http://0.0.0.0:4001"
