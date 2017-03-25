@@ -7,7 +7,7 @@ coreos:
     reboot-strategy: "etcd-lock"
   etcd2:
     name: "Elenaril"
-    discovery: "https://discovery.etcd.io/5b486258ddc3fbfb008f8426db939b50"
+    discovery: "https://discovery.etcd.io/234e3100ddd6a81ec2447bc810f30254"
     advertise-client-urls: "http://10.99.0.11:2379"
     initial-advertise-peer-urls: "http://10.99.0.11:2380"
     listen-client-urls: "http://10.99.0.11:2379,http://10.99.0.11:4001"
