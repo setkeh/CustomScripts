@@ -25,14 +25,6 @@ coreos:
 
         [Network]
         Address=10.99.0.13/16
-    - name: var-lib-etcd2.mount
-      command: start
-      content: |
-        [Mount]
-        Before=etcd2.service
-        What=10.99.0.10:/storage/shyilia
-        Where=/var/lib/etcd2
-        Type=nfs
     - name: etcd2.service
       command: start
     - name: fleet.service
