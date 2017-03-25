@@ -1,14 +1,14 @@
 #cloud-config
 coreos:
   etcd2:
-    discovery: https://discovery.etcd.io/fea9b634fe46105031d90e989eb4b207
-    advertise-client-urls: "http://$private_ipv4:2379"
-    initial-advertise-peer-urls: "http://$private_ipv4:2380"
+    discovery: https://discovery.etcd.io/100da791ec47cbc6f08a195db8ae8b05
+    advertise-client-urls: "http://10.99.0.12:2379"
+    initial-advertise-peer-urls: "http://10.99.0.12:2380"
     listen-client-urls: "http://0.0.0.0:2379,http://0.0.0.0:4001"
-    listen-peer-urls: "http://$private_ipv4:2380,http://$private_ipv4:7001"
+    listen-peer-urls: "http://10.99.0.12:2380,http://10.99.0.12:7001"
   fleet:
-    public-ip: $private_ipv4
-    etcd_servers: "http://$private_ipv4:2379"
+    public-ip: 10.99.0.12
+    etcd_servers: "http://10.99.0.12:2379"
   units:
     - name: 00-eth1.network
       runtime: true
