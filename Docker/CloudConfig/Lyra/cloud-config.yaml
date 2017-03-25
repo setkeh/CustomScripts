@@ -17,7 +17,7 @@ coreos:
         Name=eth1
 
         [Network]
-        Address=10.0.0.12/16
+        Address=10.99.0.12/16
     - name: etcd2.service
       command: start
     - name: fleet.service
